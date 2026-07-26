@@ -18,7 +18,7 @@ demo sessions are all the same two commands.
 ## Install
 
 ```bash
-npm install -g github:osolmaz/demowall
+npm install -g https://github.com/osolmaz/demowall/releases/latest/download/demowall.tgz
 ```
 
 Or for development:
