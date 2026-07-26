@@ -47,6 +47,15 @@ describe("demowall record", () => {
     expect(ffmpeg.args).toContain(":7+64,32");
     expect(ffmpeg.args).toContain("libx264");
     expect(ffmpeg.args.at(-1)).toBe("/tmp/out.mp4");
+    // Wall-clock timestamps keep playback real-time when the X server cannot
+    // sustain the requested framerate.
+    const wallclockIndex = ffmpeg.args.indexOf("-use_wallclock_as_timestamps");
+    expect(wallclockIndex).toBeGreaterThan(-1);
+    expect(ffmpeg.args[wallclockIndex + 1]).toBe("1");
+    expect(wallclockIndex).toBeLessThan(ffmpeg.args.indexOf("-i"));
+    const fpsModeIndex = ffmpeg.args.indexOf("-fps_mode");
+    expect(fpsModeIndex).toBeGreaterThan(ffmpeg.args.indexOf("-i"));
+    expect(ffmpeg.args[fpsModeIndex + 1]).toBe("vfr");
 
     expect(result.stdout).toContain("recorded: /tmp/out.mp4");
     expect(result.stdout).toContain("stopped: ghostty window closed");

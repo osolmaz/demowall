@@ -312,8 +312,16 @@ function ffmpegArgs(options: RecordOptions, display: string, geometry: WindowGeo
     `${String(geometry.width)}x${String(geometry.height)}`,
     "-draw_mouse",
     "0",
+    // Stamp frames with wall-clock time and keep them variable-rate: when the
+    // X server cannot sustain the requested framerate (common for large
+    // software-rendered captures), fixed timestamps would compress the video
+    // and make playback run faster than real time.
+    "-use_wallclock_as_timestamps",
+    "1",
     "-i",
     `${display}+${String(geometry.x)},${String(geometry.y)}`,
+    "-fps_mode",
+    "vfr",
     "-c:v",
     "libx264",
     "-preset",
