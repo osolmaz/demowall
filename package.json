@@ -1,6 +1,6 @@
 {
   "name": "demowall",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Run N copies of any CLI in a tiled tmux wall and record it as a video.",
   "type": "module",
   "license": "MIT",
@@ -22,6 +22,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json && chmod +x dist/src/cli/main.js",
+    "prepare": "npm run build",
     "format": "prettier --check .",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",

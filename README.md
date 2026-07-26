@@ -18,6 +18,12 @@ demo sessions are all the same two commands.
 ## Install
 
 ```bash
+npm install -g github:osolmaz/demowall
+```
+
+Or for development:
+
+```bash
 git clone https://github.com/osolmaz/demowall
 cd demowall
 npm install && npm run build && npm link
